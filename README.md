@@ -98,7 +98,8 @@ the installed application. You only need to do these once for all.
 
 #### TO DO
 
-Find a way so you do not have to hardcode URLs
+1. Find a way so you do not have to hardcode URLs
+2. Make the migrations work on windows too, right now sh migrate.sh is too specific
 
 ## URLs
 
