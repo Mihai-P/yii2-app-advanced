@@ -1,3 +1,10 @@
+IMPORTANT
+===================================
+Before installing this you need to purchase this theme http://demo.interface.club/?theme=brain
+I have built the admin interface based on this. The theme is not open source so I cannot make it public.
+I am trying to rebuild it on a free theme that everybody can use but for now you need to purchase that theme. Sorry :(
+
+
 Yii 2 Advanced Application Template
 ===================================
 
@@ -58,14 +65,6 @@ The minimum requirement by this application template that your Web server suppor
 INSTALLATION
 ------------
 
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `advanced` that is directly under the Web root.
-
-Then follow the instructions given in "GETTING STARTED".
-
-
 ### Install via Composer
 
 If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
@@ -75,7 +74,7 @@ You can then install the application using the following command:
 
 ~~~
 php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta4"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-advanced advanced
+php composer.phar create-project --prefer-dist --stability=dev tez/yii2-app-advanced advanced
 ~~~
 
 
@@ -87,11 +86,42 @@ the installed application. You only need to do these once for all.
 
 1. Run command `init` to initialize the application with a specific environment.
 2. Create a new database and adjust the `components['db']` configuration in `common/config/main-local.php` accordingly.
-3. Apply migrations with console command `yii migrate`. This will create tables needed for the application to work.
+3. Apply migrations with console command `sh migrate.sh`. This will create tables needed for the application to work.
 4. Set document roots of your Web server:
 
 - for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
 - for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
+5. Open backend/config/params-local.php and change the `frontend-url` to your local domain name
+6. Open backend/config/params.php and change the `frontend-url` to your live site's domain name
+7. Open common/config/params.php and add your mandrill details in the `mandrill` section. Change the `logo` a full URL with your applications logo
+8. After purchasing the Brain theme, unpack it and copy the folder HTML/Bootstrap/Liquid into the vendor/tez/yii2-brain-theme/assets/Brain/Liquid
+9. TO DO - Create a cronjob to send email notifications out
 
-To login into the application, you need to first sign up, with any of your email address, username and password.
-Then, you can login into the application with same email address and password at any time.
+#### TO DO
+
+Find a way so you do not have to hardcode URLs
+
+## URLs
+
+Login: yourhost/core/default/login Username: webmaster@2ezweb.com.au Password: admin
+Logout: yourhost/core/default/logout
+Reset Password: yourhost/core/default/request-password-reset
+User management: yourhost/core/administrator/
+
+
+## Tests
+In
+go to vendor/tez/yii2-cms-module/tests/codeception/backend/
+run
+```codecept build```
+
+to initialize the tests. Then run
+```codecept run functional```
+to run the actual tests.
+
+You can run
+```codecept run functional --coverage-html```
+to get the code coverage. You can find the coverage in vendor/tez/yii2-cms-module/tests/codeception/backend/_output/coverage/
+
+#### TO DO
+Make the tests all run from inside the application/test folder, not from inside the vendor folder
