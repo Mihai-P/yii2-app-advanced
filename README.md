@@ -129,5 +129,6 @@ You can run
 to get the code coverage. You can find the coverage in vendor/tez/yii2-cms-module/tests/codeception/backend/_output/coverage/
 
 #### TO DO
-1) Make the tests all run from inside the application/test folder, not from inside the vendor folder
-2) Make acceptance testing also work
+1. Make the tests all run from inside the application/test folder, not from inside the vendor folder
+2. Make acceptance testing also work
+2. Put instructions on how to install codeception
