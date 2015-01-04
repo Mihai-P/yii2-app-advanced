@@ -88,9 +88,8 @@ the installed application. You only need to do these once for all.
 2. Create a new database and adjust the `components['db']` configuration in `common/config/main-local.php` accordingly.
 3. Apply migrations with console command `sh migrate.sh`. This will create tables needed for the application to work.
 4. Set document roots of your Web server:
-
-- for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
-- for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
+  - for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
+  - for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
 5. Open backend/config/params-local.php and change the `frontend-url` to your local domain name
 6. Open backend/config/params.php and change the `frontend-url` to your live site's domain name
 7. Open common/config/params.php and add your mandrill details in the `mandrill` section. Change the `logo` a full URL with your applications logo
