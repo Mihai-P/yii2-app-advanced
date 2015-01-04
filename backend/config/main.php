@@ -30,9 +30,9 @@ return [
             'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
                 [
-                    'class' => 'core\components\FrontendPath',
-                    'path' => '../../frontend/web/files/images',
-                    'url' => 'http://frontend.yii2/files/images',
+                    'class' => 'core\components\StoragePath',
+                    'path' => '../../storage/',
+                    'url' => '/storage',
                     'name'  => 'Public'
                 ],
             ]

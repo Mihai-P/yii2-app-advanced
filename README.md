@@ -90,11 +90,10 @@ the installed application. You only need to do these once for all.
 4. Set document roots of your Web server:
   * for frontend `/path/to/yii-application/frontend/web/` and using the URL `http://frontend/`
   * for backend `/path/to/yii-application/backend/web/` and using the URL `http://backend/`
-5. Open backend/config/params-local.php and change the `frontend-url` to your local domain name
-6. Open backend/config/params.php and change the `frontend-url` to your live site's domain name
-7. Open common/config/params.php and add your mandrill details in the `mandrill` section. Change the `logo` a full URL with your applications logo
-8. After purchasing the Brain theme, unpack it and copy the folder HTML/Bootstrap/Liquid into the vendor/tez/yii2-brain-theme/assets/Brain/Liquid
-9. TO DO - Create a cronjob to send email notifications out
+5. Open common/config/params.php and add your mandrill details in the `mandrill` section.
+6. After purchasing the Brain theme, unpack it and copy the folder HTML/Bootstrap/Liquid into the vendor/tez/yii2-brain-theme/assets/Brain/Liquid
+7. TO DO - Create a cronjob to send email notifications out
+8. TO DO - Create info for the alias that needs to be put into the apache config file to have the storage folder to work
 
 #### TO DO
 
