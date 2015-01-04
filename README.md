@@ -111,17 +111,21 @@ Password: admin
 * User management: `yourhost/core/administrator/`
 
 ## Tests
-In
-go to vendor/tez/yii2-cms-module/tests/codeception/backend/
+Go to vendor/tez/yii2-cms-module/tests/codeception/backend/
 run
+
 ```codecept build```
 
 to initialize the tests. Then run
+
 ```codecept run```
+
 to run the actual tests.
 
 You can run
+
 ```codecept run --coverage-html```
+
 to get the code coverage. You can find the coverage in vendor/tez/yii2-cms-module/tests/codeception/backend/_output/coverage/
 
 #### TO DO
