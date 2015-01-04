@@ -116,12 +116,13 @@ run
 ```codecept build```
 
 to initialize the tests. Then run
-```codecept run functional```
+```codecept run```
 to run the actual tests.
 
 You can run
-```codecept run functional --coverage-html```
+```codecept run --coverage-html```
 to get the code coverage. You can find the coverage in vendor/tez/yii2-cms-module/tests/codeception/backend/_output/coverage/
 
 #### TO DO
-Make the tests all run from inside the application/test folder, not from inside the vendor folder
+1) Make the tests all run from inside the application/test folder, not from inside the vendor folder
+2) Make acceptance testing also work
