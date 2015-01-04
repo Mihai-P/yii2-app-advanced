@@ -103,11 +103,12 @@ Find a way so you do not have to hardcode URLs
 
 ## URLs
 
-Login: yourhost/core/default/login Username: webmaster@2ezweb.com.au Password: admin
-Logout: yourhost/core/default/logout
-Reset Password: yourhost/core/default/request-password-reset
-User management: yourhost/core/administrator/
-
+* Login: `yourhost/core/default/login`
+Username: webmaster@2ezweb.com.au
+Password: admin
+* Logout: `yourhost/core/default/logout`
+* Reset Password: `yourhost/core/default/request-password-reset`
+* User management: `yourhost/core/administrator/`
 
 ## Tests
 In
