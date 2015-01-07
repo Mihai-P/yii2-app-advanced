@@ -15,6 +15,6 @@ set YII_PATH=%~dp0
 
 if "%PHP_COMMAND%" == "" set PHP_COMMAND=php.exe
 
-"%PHP_COMMAND%" "%YII_PATH%init" %*
+"%PHP_COMMAND%" "%YII_PATH%appinit" %*
 
 @endlocal
