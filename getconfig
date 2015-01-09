@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Yii GetConfig Tool
+ *
+ * In order to run in non-interactive mode:
+ *
+ * getconfig common/config/main-local.php components.db.dsn
+ *
+ * Parameters:
+ *
+ * * filename -- configuration file name
+ *
+ * * variable.name -- configuration variable
+ *
+ * @author Del <del@babel.com.au>
+ */
+
+// ==============================================================================
+// Parameters and environment
+// ==============================================================================
+
+if ($_SERVER['argc'] != 3) {
+    print "Usage: getconfig filename variable.name\n";
+    exit;
+}
+
+// Load arguments
+$filename = $_SERVER['argv'][1];
+$varname = $_SERVER['argv'][2];
+
+// Load config file
+if (! file_exists($filename)) {
+    print "File $filename does not exist.\n";
+    exit;
+}
+$config = include($filename);
+
+// Fetch config variable
+$varbits = explode('.', $varname);
+// print_r($config);
+// print_r($varbits);
+
+// Drill down into config array to find the bit that we need
+foreach ($varbits as $varbit) {
+    if (! isset($config[$varbit])) {
+        print "Config[$varname] is not set.\n";
+        exit;
+    }
+    $config = $config[$varbit];
+}
+
+// Report variable to stdout
+print_r($config);
+print "\n";
