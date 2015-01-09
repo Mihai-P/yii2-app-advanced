@@ -6,6 +6,15 @@
  * In order to run in non-interactive mode:
  *
  * appinit --env=Development --overwrite=n
+ * appinit --env=Production --overwrite=all
+ *
+ * Parameters:
+ *
+ * * --env=[Development | Production] or see the environment names listed in
+ *   environments/index.php
+ *
+ * * --overwrite=[y|n|all] -- overwrite files.  y or all to overwrite all files,
+ *   n to not overwrite files that are already present.
  *
  * @author Alexander Makarov <sam@rmcreative.ru>
  *
@@ -17,6 +26,10 @@
 if (!extension_loaded('mcrypt')) {
     die('The mcrypt PHP extension is required by Yii2.');
 }
+
+// ==============================================================================
+// Parameters and environment
+// ==============================================================================
 
 $params = getParams();
 $root = str_replace('\\', '/', __DIR__);
@@ -63,15 +76,29 @@ if (empty($params['env'])) {
     }
 }
 
+// ==============================================================================
+// Initialisation
+// ==============================================================================
+
 echo "\n  Start initialization ...\n\n";
 $files = getFileList("$root/environments/{$env['path']}");
 $all = false;
+if (! empty($params['overwrite']) && ($params['overwrite']=='all')) {
+    $all = true;
+}
+
+//
+// Copy files
+//
 foreach ($files as $file) {
     if (!copyFile($root, "environments/{$env['path']}/$file", $file, $all, $params)) {
         break;
     }
 }
 
+//
+// Callbacks -- set files writeable, set files executable, set cookie validity
+//
 $callbacks = ['setCookieValidationKey', 'setWritable', 'setExecutable'];
 foreach ($callbacks as $callback) {
     if (!empty($env[$callback])) {
@@ -81,12 +108,16 @@ foreach ($callbacks as $callback) {
 
 echo "\n  ... initialization completed.\n\n";
 
+// ==============================================================================
+// Functions
+// ==============================================================================
+
 function getFileList($root, $basePath = '')
 {
     $files = [];
     $handle = opendir($root);
     while (($path = readdir($handle)) !== false) {
-        if ($path === '.svn' || $path === '.' || $path === '..') {
+        if ($path === '.svn' || $path === '.git' || $path === '.' || $path === '..') {
             continue;
         }
         $fullPath = "$root/$path";
