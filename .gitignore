@@ -33,6 +33,10 @@ composer.phar
 # APIGen documentation and reports
 documents/
 reports/
+/dirlist.app
+/dirlist.cache
+/dirlist.vendor
+
 
 # phpunit itself is not needed
 phpunit.phar
