@@ -1,4 +1,8 @@
 <?php
+/**
+ * Password reset request form
+ */
+
 namespace frontend\models;
 
 use common\models\User;

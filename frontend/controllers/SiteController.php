@@ -1,4 +1,8 @@
 <?php
+/**
+ * Site controller
+ */
+
 namespace frontend\controllers;
 
 use Yii;
@@ -15,6 +19,15 @@ use yii\filters\AccessControl;
 
 /**
  * Site controller
+ *
+ * SiteController is the base class of all frontend controllers.  In addition
+ * to the functionality extended from \yii\web\Controller it provides authorisation,
+ * login/logout functionality, and a base index action.
+ *
+ * @see \yii\web\Controller
+ * @see \yii\base\Controller
+ * @see \yii\base\Component
+ * @see \yii\base\Object
  */
 class SiteController extends Controller
 {
@@ -65,11 +78,26 @@ class SiteController extends Controller
         ];
     }
 
+    /**
+     * Index action
+     *
+     * Renders the site home page.
+     *
+     * @return string Rendering result
+     */
     public function actionIndex()
     {
         return $this->render('index');
     }
 
+    /**
+     * Login action
+     *
+     * Renders the site login page.  If a login request has been posted then it attempts
+     * the login and returns to the previous page if successful.
+     *
+     * @return string Rendering result
+     */
     public function actionLogin()
     {
         if (!\Yii::$app->user->isGuest) {
@@ -86,6 +114,13 @@ class SiteController extends Controller
         }
     }
 
+    /**
+     * Logout action
+     *
+     * Logs the user out and returns to the home page.
+     *
+     * @return string Rendering result
+     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -93,6 +128,13 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * Contact Form action
+     *
+     * Renders the contact page and processes any form submissions.
+     *
+     * @return string Rendering result
+     */
     public function actionContact()
     {
         $model = new ContactForm();
@@ -111,11 +153,25 @@ class SiteController extends Controller
         }
     }
 
+    /**
+     * About action
+     *
+     * Renders an about page.
+     *
+     * @return string Rendering result
+     */
     public function actionAbout()
     {
         return $this->render('about');
     }
 
+    /**
+     * Signup Form action
+     *
+     * Renders the signup page and processes any form submissions.
+     *
+     * @return string Rendering result
+     */
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -132,6 +188,13 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * Password Reset Form action
+     *
+     * Renders the password reset page and processes any form submissions.
+     *
+     * @return string Rendering result
+     */
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -150,6 +213,14 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * Password Reset action
+     *
+     * Renders the password reset form.  If the form submission is successful then
+     * reset the user's password and returns to the home page.
+     *
+     * @return string Rendering result
+     */
     public function actionResetPassword($token)
     {
         try {

@@ -8,9 +8,26 @@
 
 APPNAME='My Application Name Goes Here'
 CMDFILE=apigen.cmd.$$
+DESTDIR=./documents
 
-mkdir -p ./reports
-mkdir -p ./documents/apigen
+#
+# Find apigen, either in the path or as a local phar file
+#
+if [ -f apigen.phar ]; then
+    APIGEN="php apigen.phar generate"
+
+else
+    APIGEN=`which apigen`
+    if [ ! -f "$APIGEN" ]; then
+        echo "apigen is not installed in the path or locally, please install it"
+        echo "see http://www.apigen.org/"
+        exit 1
+    fi
+    APIGEN="$APIGEN generate"
+fi
+#
+# TODO: Search for phpdoc if apigen is not found.
+#
 
 #
 # Without any arguments this builds the entire system documentation,
@@ -28,7 +45,7 @@ if [ -z "$1" ]; then
     #
     # Build the apigen command in a file.
     #
-    echo "apigen --title '$APPNAME API Documentation' --destination ./documents/apigen --report ./reports/apigen.xml \\" > $CMDFILE
+    echo "$APIGEN --php --tree --title '$APPNAME API Documentation' --destination $DESTDIR/main \\" > $CMDFILE
     cat dirlist.cache | while read dir; do
         echo "--source $dir \\" >> $CMDFILE
     done
@@ -37,6 +54,7 @@ if [ -z "$1" ]; then
     #
     # Run the apigen command
     #
+    mkdir -p $DESTDIR/main
     . ./$CMDFILE
     
     /bin/rm -f ./$CMDFILE
@@ -52,7 +70,7 @@ elif [ "$1" = "makecache" ]; then
                 grep -q 'class' $file && dirname $file
             done
         ) | sort -u | \
-        grep -v -E 'assets|config|docs|migrations|test|Test|views|web' > dirlist.app
+        grep -v -E 'config|docs|migrations|test|Test|views|web' > dirlist.app
 
     echo "Find vendor source directories"
     find vendor -name \*.php -print | \
@@ -61,17 +79,17 @@ elif [ "$1" = "makecache" ]; then
                 grep -q 'class' $file && dirname $file
             done
         ) | sort -u | \
-        grep -v -E 'assets|config|docs|migrations|test|Test|views|web' > dirlist.vendor
+        grep -v -E 'config|docs|migrations|test|Test|views' > dirlist.vendor
   
     #
     # Filter out any vendor directories for which apigen fails
     #
     echo "Filter source directories"
+    mkdir -p $DESTDIR/tmp
     cat dirlist.app dirlist.vendor | while read dir; do
-        apigen --quiet --title "Test please ignore" \
+        $APIGEN --quiet --title "Test please ignore" \
             --source $dir \
-            --destination ./documents/apigen \
-            --report ./reports/apigen.xml && (
+            --destination $DESTDIR/tmp && (
                 echo "Including $dir"
                 echo $dir >> dirlist.cache
             ) || (
@@ -79,32 +97,32 @@ elif [ "$1" = "makecache" ]; then
             )
     done
     echo "Documentation cache dirlist.cache built OK"
-
-
-# Don't work for various reasons
-# --source ./vendor/cebe/markdown duplicate trait method declared
-# --source ./vendor/mpdf/mpdf/classes contains no documentation
+    
+    #
+    # Clean up
+    #
+    /bin/rm -rf $DESTDIR/tmp
 
 #
 # Documentation for sub-components
 #
 elif [ "$1" = "eway" ]; then
-    apigen \
+    mkdir -p $DESTDIR/omnipay
+    $APIGEN \
     --title 'Omnipay and eWay Gateway API documentation' \
     --source ./vendor/tez/omnipay-eway/src \
     --source ./vendor/omnipay/common/src \
     --source ./vendor/omnipay/eway/src \
-    --destination ./documents/apigen \
-    --report ./reports/apigen.xml
+    --destination $DESTDIR/omnipay
 
 elif [ "$1" = "cms" ]; then
-    apigen \
+    mkdir -p $DESTDIR/cms
+    $APIGEN \
     --title 'Yii2 CMS Module API documentation' \
     --source ./vendor/tez/yii2-cms-module/components \
     --source ./vendor/tez/yii2-cms-module/controllers \
     --source ./vendor/tez/yii2-cms-module/models \
     --source ./vendor/tez/yii2-cms-module/widgets \
-    --destination ./documents/apigen \
-    --report ./reports/apigen.xml
+    --destination $DESTDIR/cms
 
 fi

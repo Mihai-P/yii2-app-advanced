@@ -1,4 +1,8 @@
 <?php
+/**
+ * Signup form
+ */
+
 namespace frontend\models;
 
 use common\models\User;

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Site controller
+ */
+
 namespace backend\controllers;
 
 use Yii;
@@ -9,6 +13,15 @@ use yii\filters\VerbFilter;
 
 /**
  * Site controller
+ *
+ * SiteController is the base class of all backend controllers.  In addition
+ * to the functionality extended from \yii\web\Controller it provides authorisation,
+ * login/logout functionality, and a base index action.
+ *
+ * @see \yii\web\Controller
+ * @see \yii\base\Controller
+ * @see \yii\base\Component
+ * @see \yii\base\Object
  */
 class SiteController extends Controller
 {

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Login form
+ */
+
 namespace common\models;
 
 use Yii;
@@ -6,14 +10,30 @@ use yii\base\Model;
 
 /**
  * Login form
+ *
+ * The Login form implements a base model for login and logout.
  */
 class LoginForm extends Model
 {
+    /**
+     * @var string
+     */
     public $username;
+
+    /**
+     * @var string
+     */
     public $password;
+
+    /**
+     * @var boolean
+     */
     public $rememberMe = true;
 
-    private $_user = false;
+    /**
+     * @var common\models\User
+     */
+    protected $_user = false;
 
 
     /**

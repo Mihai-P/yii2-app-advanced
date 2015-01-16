@@ -1,4 +1,8 @@
 <?php
+/**
+ * User model
+ */
+
 namespace common\models;
 
 use Yii;
@@ -9,6 +13,9 @@ use yii\web\IdentityInterface;
 
 /**
  * User model
+ *
+ * The User model implements attributes and storage for the base User class
+ * that is used for authorization for both backend and frontend access.
  *
  * @property integer $id
  * @property string $username

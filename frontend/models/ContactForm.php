@@ -1,4 +1,7 @@
 <?php
+/**
+ * ContactForm is the model behind the contact form.
+ */
 
 namespace frontend\models;
 

@@ -1,13 +1,19 @@
 <?php
 /**
+ * Alert Widget
+ *
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
+ * @author Kartik Visweswaran <kartikv2@gmail.com>
+ * @author Alexander Makarov <sam@rmcreative.ru>
  */
 
 namespace frontend\widgets;
 
 /**
+ * Alert Widget
+ *
  * Alert widget renders a message from session flash. All flash messages are displayed
  * in the sequence they were assigned using setFlash. You can set message as following:
  *
@@ -22,9 +28,6 @@ namespace frontend\widgets;
  * ```php
  * \Yii::$app->getSession()->setFlash('error', ['Error 1', 'Error 2']);
  * ```
- *
- * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @author Alexander Makarov <sam@rmcreative.ru>
  */
 class Alert extends \yii\bootstrap\Widget
 {
